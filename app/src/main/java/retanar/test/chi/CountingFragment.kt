@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.activity.addCallback
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
@@ -38,6 +39,8 @@ class CountingFragment : Fragment() {
         button.setOnClickListener {
             incrementCounter(textView)
         }
+
+        (activity as AppCompatActivity?)?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
