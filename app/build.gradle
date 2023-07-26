@@ -8,7 +8,7 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "retanar.test.chi"
+        applicationId "retanar.test.chi.level_1"
         minSdk 26
         targetSdk 33
         versionCode 1
