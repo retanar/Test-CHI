@@ -6,8 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.activity.addCallback
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResult
+import androidx.navigation.fragment.findNavController
 
 class CountingFragment : Fragment() {
 
@@ -22,10 +25,23 @@ class CountingFragment : Fragment() {
         val textView = view.findViewById<TextView>(R.id.fragmentCounterTextView)
         val button = view.findViewById<Button>(R.id.incrementButton)
 
+        arguments?.let { counter = it.getInt("counter") }
+        savedInstanceState?.let { counter = it.getInt("counter") }
+
+        // Override on back press to pass counter value
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            setFragmentResult("req", bundleOf("counter" to counter))
+            findNavController().popBackStack()
+        }
+
         textView.text = counter.toString()
         button.setOnClickListener {
             incrementCounter(textView)
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putInt("counter", counter)
     }
 
     private fun incrementCounter(textView: TextView) {

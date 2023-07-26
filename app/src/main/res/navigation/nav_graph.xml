@@ -9,5 +9,10 @@
         <action android:id="@+id/action_mainFragment_to_countingFragment" app:destination="@id/countingFragment"/>
     </fragment>
     <fragment android:id="@+id/countingFragment" android:name="retanar.test.chi.CountingFragment"
-              android:label="fragment_counting" tools:layout="@layout/fragment_counting"/>
+              android:label="fragment_counting" tools:layout="@layout/fragment_counting">
+        <argument
+            android:name="counter"
+            app:argType="integer"
+            android:defaultValue="0"/>
+    </fragment>
 </navigation>
