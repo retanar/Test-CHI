@@ -7,11 +7,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import retanar.test.chi.R
+import retanar.test.chi.database.UsersDatabase
 import retanar.test.chi.databinding.FragmentMainBinding
 
 class MainFragment : Fragment(), MenuProvider {
 
-    private val viewModel: MainViewModel by activityViewModels()
+    private val viewModel: MainViewModel by activityViewModels {
+        MainViewModelFactory(UsersDatabase.getDatabase(requireContext()).usersDao)
+    }
     private lateinit var binding: FragmentMainBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
