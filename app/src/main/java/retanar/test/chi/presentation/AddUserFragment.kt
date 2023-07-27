@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import retanar.test.chi.database.UsersDatabase
 import retanar.test.chi.databinding.FragmentAddUserBinding
 
+// TODO: add date picker
 class AddUserFragment : Fragment() {
 
     private val viewModel: MainViewModel by activityViewModels {

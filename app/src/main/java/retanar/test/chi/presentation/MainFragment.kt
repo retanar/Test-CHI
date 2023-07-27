@@ -6,6 +6,7 @@ import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import retanar.test.chi.R
 import retanar.test.chi.database.UsersDatabase
 import retanar.test.chi.databinding.FragmentMainBinding
@@ -16,11 +17,20 @@ class MainFragment : Fragment(), MenuProvider {
         MainViewModelFactory(UsersDatabase.getDatabase(requireContext()).usersDao)
     }
     private lateinit var binding: FragmentMainBinding
+    private lateinit var adapter: UsersListAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentMainBinding.inflate(inflater, container, false)
         // Add menu for this fragment
         requireActivity().addMenuProvider(this, viewLifecycleOwner)
+
+        adapter = UsersListAdapter()
+        binding.recycler.layoutManager = LinearLayoutManager(context)
+        binding.recycler.adapter = adapter
+
+        viewModel.allUsers.observe(viewLifecycleOwner) { usersList ->
+            adapter.submitList(usersList)
+        }
 
         return binding.root
     }
