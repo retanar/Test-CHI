@@ -16,7 +16,13 @@ class MainViewModel(
 
     fun addNewUser(name: String, dateOfBirth: String) {
         viewModelScope.launch {
-            dao.insert(UserEntity(id = 0, name = name, dateOfBirth = dateOfBirth, isStudent = false))
+            dao.insert(UserEntity(name = name, dateOfBirth = dateOfBirth))
+        }
+    }
+
+    fun updateUser(updatedUser: UserEntity) {
+        viewModelScope.launch {
+            dao.updateUser(updatedUser)
         }
     }
 }

@@ -7,10 +7,10 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "users")
 data class UserEntity(
     @PrimaryKey(autoGenerate = true)
-    var id: Int,
+    val id: Int = 0,
     val name: String,
     @ColumnInfo("date_of_birth")
     val dateOfBirth: String,
     @ColumnInfo("is_student")
-    val isStudent: Boolean,
+    val isStudent: Boolean = false,
 )

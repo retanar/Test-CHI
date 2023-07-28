@@ -11,26 +11,37 @@ import java.time.LocalDate
 import java.time.Period
 import java.time.format.DateTimeFormatter
 
-class UsersListAdapter : ListAdapter<UserEntity, UsersListAdapter.UserItemViewHolder>(UsersComparator()) {
+class UsersListAdapter(
+    private val onItemClickListener: (Int) -> Unit,
+    private val onUserChecked: (UserEntity) -> Unit
+) : ListAdapter<UserEntity, UsersListAdapter.UserItemViewHolder>(UsersComparator()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserItemViewHolder {
         return UserItemViewHolder(UserListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: UserItemViewHolder, position: Int) {
-        val item = getItem(position)
-        holder.binding.userName.text = item.name
-        val age = Period.between(
-            LocalDate.parse(item.dateOfBirth, DateTimeFormatter.ofPattern("dd.MM.yyyy")),
-            LocalDate.now(),
-        ).years
-        holder.binding.userAge.text = age.toString()
+        val entity = getItem(position)
+        with(holder.binding) {
+            userName.text = entity.name
+            val age = Period.between(
+                LocalDate.parse(entity.dateOfBirth, DateTimeFormatter.ofPattern("dd.MM.yyyy")),
+                LocalDate.now(),
+            ).years
+            userAge.text = age.toString()
+            isStudent.isChecked = entity.isStudent
+
+            itemCard.setOnClickListener { onItemClickListener(position) }
+            isStudent.setOnClickListener {
+                onUserChecked(entity.copy(isStudent = !entity.isStudent))
+            }
+        }
     }
 
     class UserItemViewHolder(val binding: UserListItemBinding) : ViewHolder(binding.root)
 
     class UsersComparator : ItemCallback<UserEntity>() {
-        override fun areItemsTheSame(oldItem: UserEntity, newItem: UserEntity) = oldItem === newItem
+        override fun areItemsTheSame(oldItem: UserEntity, newItem: UserEntity) = oldItem.id == newItem.id
 
         override fun areContentsTheSame(oldItem: UserEntity, newItem: UserEntity) = oldItem == newItem
     }

@@ -2,6 +2,7 @@ package retanar.test.chi.presentation
 
 import android.os.Bundle
 import android.view.*
+import androidx.core.os.bundleOf
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -24,7 +25,12 @@ class MainFragment : Fragment(), MenuProvider {
         // Add menu for this fragment
         requireActivity().addMenuProvider(this, viewLifecycleOwner)
 
-        adapter = UsersListAdapter()
+        adapter = UsersListAdapter(
+            onItemClickListener = {
+                findNavController().navigate(R.id.action_mainFragment_to_userDetailsFragment, bundleOf(/*TODO*/))
+            },
+            onUserChecked = viewModel::updateUser,
+        )
         binding.recycler.layoutManager = LinearLayoutManager(context)
         binding.recycler.adapter = adapter
 
