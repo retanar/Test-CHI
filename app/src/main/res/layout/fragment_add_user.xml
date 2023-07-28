@@ -5,24 +5,32 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".presentation.AddUserFragment" android:gravity="center_horizontal">
+        tools:context=".presentation.AddUserFragment"
+        android:gravity="center_horizontal">
 
     <EditText
             android:id="@+id/userNameEditText"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:layout_marginTop="24dp"
             android:hint="Name"
-            android:minHeight="48dp"/>
+            android:ems="12"
+            android:minHeight="48dp"
+            android:singleLine="true"/>
     <EditText
             android:id="@+id/dateEditText"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="date"
+            android:inputType="none"
             android:minHeight="48dp"
             android:layout_marginTop="24dp"
-            android:hint="Date"/>
+            android:hint="Date of birth"
+            android:ems="12"
+            android:drawableEnd="@drawable/ic_calendar"
+            android:singleLine="true"
+            android:clickable="true"
+            android:focusableInTouchMode="false"/>
     <Button
             android:text="Add"
             android:layout_width="wrap_content"
