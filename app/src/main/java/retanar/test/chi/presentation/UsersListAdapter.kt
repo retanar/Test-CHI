@@ -9,8 +9,9 @@ import retanar.test.chi.database.UserEntity
 import retanar.test.chi.databinding.UserListItemBinding
 
 class UsersListAdapter(
-    private val onItemClickListener: (Int) -> Unit,
-    private val onUserChecked: (UserEntity) -> Unit
+    private val onItemClick: (Int) -> Unit,
+    private val onUserChecked: (UserEntity) -> Unit,
+    private val onItemLongClick: (Int) -> Unit,
 ) : ListAdapter<UserEntity, UsersListAdapter.UserItemViewHolder>(UsersComparator()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserItemViewHolder {
@@ -24,7 +25,11 @@ class UsersListAdapter(
             userAge.text = entity.age.toString()
             isStudent.isChecked = entity.isStudent
 
-            itemCard.setOnClickListener { onItemClickListener(position) }
+            itemCard.setOnClickListener { onItemClick(position) }
+            itemCard.setOnLongClickListener {
+                onItemLongClick(position)
+                true
+            }
             isStudent.setOnClickListener {
                 onUserChecked(entity.copy(isStudent = !entity.isStudent))
             }

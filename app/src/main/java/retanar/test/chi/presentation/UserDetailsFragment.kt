@@ -1,10 +1,11 @@
-package retanar.test.chi
+package retanar.test.chi.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import retanar.test.chi.R
 import retanar.test.chi.databinding.FragmentUserDetailsBinding
 
 class UserDetailsFragment : Fragment() {

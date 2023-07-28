@@ -1,13 +1,20 @@
 package retanar.test.chi.presentation
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.core.os.bundleOf
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import retanar.test.chi.R
 import retanar.test.chi.database.UsersDatabase
 import retanar.test.chi.databinding.FragmentMainBinding
@@ -26,8 +33,9 @@ class MainFragment : Fragment(), MenuProvider {
         requireActivity().addMenuProvider(this, viewLifecycleOwner)
 
         adapter = UsersListAdapter(
-            onItemClickListener = ::openDetailsFragment,
+            onItemClick = ::openDetailsFragment,
             onUserChecked = viewModel::updateUser,
+            onItemLongClick = ::openRemoveDialog,
         )
         binding.recycler.layoutManager = LinearLayoutManager(context)
         binding.recycler.adapter = adapter
@@ -35,8 +43,30 @@ class MainFragment : Fragment(), MenuProvider {
         viewModel.allUsers.observe(viewLifecycleOwner) { usersList ->
             adapter.submitList(usersList)
         }
+        viewModel.userAddedNotification.observe(viewLifecycleOwner) { wasAdded ->
+            wasAdded?.let {
+                Snackbar.make(
+                    binding.root,
+                    if (wasAdded)
+                        "User was added successfully"
+                    else
+                        "An error occurred, user was not added",
+                    Snackbar.LENGTH_SHORT
+                ).show()
+                viewModel.clearUserAddedNotification()
+            }
+        }
 
         return binding.root
+    }
+
+    private fun openRemoveDialog(userPosition: Int) {
+        val user = viewModel.allUsers.value?.get(userPosition) ?: return
+        AlertDialog.Builder(requireContext())
+            .setTitle("Remove ${user.name}?")
+            .setPositiveButton("YES") { _, _ -> viewModel.removeUser(user) }
+            .setNegativeButton("CANCEL", null)
+            .show()
     }
 
     private fun openDetailsFragment(userPosition: Int) {

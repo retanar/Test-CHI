@@ -4,15 +4,17 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".UserDetailsFragment"
-        android:orientation="vertical" android:gravity="center_horizontal">
+        tools:context=".presentation.UserDetailsFragment"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
     <TextView
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             android:textColor="?attr/colorOnBackground"
-            tools:text="Name"/>
+            android:textAlignment="center"
+            tools:text="Very long long long looooong name"/>
     <TextView
             android:id="@+id/dateOfBirth"
             android:layout_width="wrap_content"
