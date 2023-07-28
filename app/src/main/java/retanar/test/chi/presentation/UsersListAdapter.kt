@@ -7,9 +7,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import retanar.test.chi.database.UserEntity
 import retanar.test.chi.databinding.UserListItemBinding
-import java.time.LocalDate
-import java.time.Period
-import java.time.format.DateTimeFormatter
 
 class UsersListAdapter(
     private val onItemClickListener: (Int) -> Unit,
@@ -24,11 +21,7 @@ class UsersListAdapter(
         val entity = getItem(position)
         with(holder.binding) {
             userName.text = entity.name
-            val age = Period.between(
-                LocalDate.parse(entity.dateOfBirth, DateTimeFormatter.ofPattern("dd.MM.yyyy")),
-                LocalDate.now(),
-            ).years
-            userAge.text = age.toString()
+            userAge.text = entity.age.toString()
             isStudent.isChecked = entity.isStudent
 
             itemCard.setOnClickListener { onItemClickListener(position) }

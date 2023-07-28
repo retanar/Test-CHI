@@ -5,4 +5,33 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".UserDetailsFragment"
-        android:orientation="vertical"/>
+        android:orientation="vertical" android:gravity="center_horizontal">
+    <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textColor="?attr/colorOnBackground"
+            tools:text="Name"/>
+    <TextView
+            android:id="@+id/dateOfBirth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="?attr/colorOnBackground"
+            tools:text="@string/user_details_date_of_birth"/>
+    <TextView
+            android:id="@+id/age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="?attr/colorOnBackground"
+            tools:text="@string/user_details_age"/>
+    <TextView
+            android:id="@+id/student"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="?attr/colorOnBackground"
+            tools:text="@string/user_details_is_student"/>
+</LinearLayout>

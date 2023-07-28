@@ -26,9 +26,7 @@ class MainFragment : Fragment(), MenuProvider {
         requireActivity().addMenuProvider(this, viewLifecycleOwner)
 
         adapter = UsersListAdapter(
-            onItemClickListener = {
-                findNavController().navigate(R.id.action_mainFragment_to_userDetailsFragment, bundleOf(/*TODO*/))
-            },
+            onItemClickListener = ::openDetailsFragment,
             onUserChecked = viewModel::updateUser,
         )
         binding.recycler.layoutManager = LinearLayoutManager(context)
@@ -39,6 +37,17 @@ class MainFragment : Fragment(), MenuProvider {
         }
 
         return binding.root
+    }
+
+    private fun openDetailsFragment(userPosition: Int) {
+        val entity = viewModel.allUsers.value?.get(userPosition) ?: return
+        val args = bundleOf(
+            "name" to entity.name,
+            "dateOfBirth" to entity.dateOfBirth,
+            "age" to entity.age,
+            "isStudent" to entity.isStudent,
+        )
+        findNavController().navigate(R.id.action_mainFragment_to_userDetailsFragment, args)
     }
 
     override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {

@@ -13,6 +13,20 @@ class UserDetailsFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentUserDetailsBinding.inflate(inflater, container, false)
+
+        arguments?.let {
+            binding.name.text = it.getString("name")
+            binding.dateOfBirth.text = resources.getString(
+                R.string.user_details_date_of_birth,
+                it.getString("dateOfBirth")
+            )
+            binding.age.text = resources.getString(R.string.user_details_age, it.getInt("age"))
+            binding.student.text = resources.getString(
+                R.string.user_details_is_student,
+                if (it.getBoolean("isStudent")) "Yes" else "No"
+            )
+        }
+
         return binding.root
     }
 }
