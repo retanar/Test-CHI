@@ -28,6 +28,7 @@
             android:hint="Date of birth"
             android:ems="12"
             android:drawableEnd="@drawable/ic_calendar"
+            android:drawableTint="@color/material_on_background_emphasis_high_type"
             android:singleLine="true"
             android:clickable="true"
             android:focusableInTouchMode="false"/>

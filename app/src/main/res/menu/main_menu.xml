@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="Add User" android:id="@+id/actionAddUser"/>
+<menu
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:title="Add User"
+          android:id="@+id/actionAddUser"/>
+    <item android:title="Sorting"
+          android:id="@+id/actionSorting"
+          android:icon="@drawable/ic_sort"
+          app:iconTint="@color/white"
+          app:showAsAction="ifRoom"/>
 </menu>

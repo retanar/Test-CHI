@@ -90,6 +90,20 @@ class MainFragment : Fragment(), MenuProvider {
             true
         }
 
+        R.id.actionSorting -> {
+            openSortingDialog()
+            true
+        }
+
         else -> false
+    }
+
+    private fun openSortingDialog() {
+        AlertDialog.Builder(requireContext())
+            .setTitle("Sort by")
+            .setItems(R.array.sorting_types) { _, index ->
+                viewModel.setSortingType(index)
+            }
+            .show()
     }
 }
