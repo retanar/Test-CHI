@@ -13,6 +13,7 @@ data class UserEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val name: String,
+    val description: String,
     @ColumnInfo("date_of_birth")
     val dateOfBirth: String,
     @ColumnInfo("is_student")

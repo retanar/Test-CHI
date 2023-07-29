@@ -22,6 +22,7 @@ class UsersListAdapter(
         val entity = getItem(position)
         with(holder.binding) {
             userName.text = entity.name
+            userDescription.text = entity.description
             userAge.text = entity.age.toString()
             isStudent.isChecked = entity.isStudent
 

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="sorting_types">
-        <item>Default</item>
+        <!-- Commented because task doesn't ask for this item, but it can be useful
+        <item>Default</item>-->
         <item>Name</item>
         <item>Age</item>
         <item>Student</item>
+        <item>Description</item>
     </array>
 </resources>

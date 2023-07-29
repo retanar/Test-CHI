@@ -16,7 +16,6 @@ import java.time.format.DateTimeFormatter
 
 // Should correspond to R.array.sorting_types
 enum class SortingType(val comparator: Comparator<UserEntity>?) {
-    DEFAULT(null),
     NAME(compareBy(UserEntity::name)),
 
     // Sorting by days since epoch - more recent birthdate first
@@ -24,6 +23,10 @@ enum class SortingType(val comparator: Comparator<UserEntity>?) {
         -LocalDate.parse(it.dateOfBirth, DateTimeFormatter.ofPattern("dd.MM.yyyy")).toEpochDay()
     }),
     STUDENT(compareBy({ !it.isStudent }, UserEntity::name)),
+    DESCRIPTION(compareBy(UserEntity::description)),
+
+    // Moved to the end to not be triggered by sorting dialog
+    DEFAULT(null),
 }
 
 class MainViewModel(
@@ -43,10 +46,10 @@ class MainViewModel(
     val userAddedNotification: LiveData<Boolean?>
         get() = _userAddedNotification
 
-    fun addNewUser(name: String, dateOfBirth: String) {
+    fun addNewUser(name: String, dateOfBirth: String, description: String) {
         try {
             viewModelScope.launch {
-                dao.insert(UserEntity(name = name, dateOfBirth = dateOfBirth))
+                dao.insert(UserEntity(name = name, dateOfBirth = dateOfBirth, description = description))
             }
             _userAddedNotification.value = true
         } catch (e: Exception) {

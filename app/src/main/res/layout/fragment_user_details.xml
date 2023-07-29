@@ -1,39 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<ScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.UserDetailsFragment"
-        android:orientation="vertical"
-        android:gravity="center_horizontal">
-    <TextView
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
+        tools:context=".presentation.UserDetailsFragment">
+    <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-            android:textColor="?attr/colorOnBackground"
-            android:textAlignment="center"
-            tools:text="Very long long long looooong name"/>
-    <TextView
-            android:id="@+id/dateOfBirth"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="?attr/colorOnBackground"
-            tools:text="@string/user_details_date_of_birth"/>
-    <TextView
-            android:id="@+id/age"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="?attr/colorOnBackground"
-            tools:text="@string/user_details_age"/>
-    <TextView
-            android:id="@+id/student"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textColor="?attr/colorOnBackground"
-            tools:text="@string/user_details_is_student"/>
-</LinearLayout>
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+        <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textColor="?attr/colorOnBackground"
+                android:textAlignment="center"
+                tools:text="Very long long long looooong name"/>
+        <TextView
+                android:id="@+id/dateOfBirth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="?attr/colorOnBackground"
+                tools:text="@string/user_details_date_of_birth"/>
+        <TextView
+                android:id="@+id/age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="?attr/colorOnBackground"
+                tools:text="@string/user_details_age"/>
+        <TextView
+                android:id="@+id/student"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="?attr/colorOnBackground"
+                tools:text="@string/user_details_is_student"/>
+        <TextView
+                android:id="@+id/description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:layout_gravity="start"
+                tools:text="Very long long long loooooooooooooooooooooooooooooooong description"/>
+    </LinearLayout>
+</ScrollView>

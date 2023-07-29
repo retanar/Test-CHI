@@ -65,7 +65,7 @@ class MainFragment : Fragment(), MenuProvider {
         AlertDialog.Builder(requireContext())
             .setTitle("Remove ${user.name}?")
             .setPositiveButton("YES") { _, _ -> viewModel.removeUser(user) }
-            .setNegativeButton("CANCEL", null)
+            .setNegativeButton("NO", null)
             .show()
     }
 
@@ -76,6 +76,7 @@ class MainFragment : Fragment(), MenuProvider {
             "dateOfBirth" to entity.dateOfBirth,
             "age" to entity.age,
             "isStudent" to entity.isStudent,
+            "description" to entity.description,
         )
         findNavController().navigate(R.id.action_mainFragment_to_userDetailsFragment, args)
     }

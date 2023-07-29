@@ -26,6 +26,7 @@ class UserDetailsFragment : Fragment() {
                 R.string.user_details_is_student,
                 if (it.getBoolean("isStudent")) "Yes" else "No"
             )
+            binding.description.text = it.getString("description")
         }
 
         return binding.root

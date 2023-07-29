@@ -35,6 +35,7 @@ class AddUserFragment : Fragment() {
             viewModel.addNewUser(
                 binding.userNameEditText.text.toString(),
                 binding.dateEditText.text.toString(),
+                binding.userDescriptionEditText.text.toString(),
             )
             findNavController().popBackStack()
         }
