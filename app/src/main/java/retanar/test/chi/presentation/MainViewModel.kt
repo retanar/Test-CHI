@@ -37,9 +37,11 @@ class MainViewModel : ViewModel() {
         }
     }
 
-    fun changeFavorite(position: Int) {
-        val shibe = internalList.getOrNull(position) ?: return
-        internalList[position] = shibe.copy(isFavorite = !shibe.isFavorite)
+    // change by unique url
+    fun changeFavorite(url: String) {
+        val index = internalList.indexOfFirst { it.url == url }
+        val shibe = internalList.getOrNull(index) ?: return
+        internalList[index] = shibe.copy(isFavorite = !shibe.isFavorite)
         updatePublicList()
     }
 

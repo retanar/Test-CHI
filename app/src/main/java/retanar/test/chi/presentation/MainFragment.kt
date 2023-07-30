@@ -1,47 +1,57 @@
 package retanar.test.chi.presentation
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.tabs.TabLayoutMediator
+import retanar.test.chi.ImagePageFragment
 import retanar.test.chi.databinding.FragmentMainBinding
 
 class MainFragment : Fragment() {
 
     private val viewModel: MainViewModel by activityViewModels()
     private lateinit var binding: FragmentMainBinding
-    private lateinit var adapter: ShibeListAdapter
+    private lateinit var pageAdapter: PageAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentMainBinding.inflate(inflater, container, false)
 
-        adapter = ShibeListAdapter(
-            onChangeFavorite = viewModel::changeFavorite,
-        )
-        binding.recycler.adapter = adapter
-        binding.recycler.layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
-//        StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL).apply {
-//            gapStrategy = StaggeredGridLayoutManager.GAP_HANDLING_NONE
-//        }
-
         viewModel.requestShibes()
-        viewModel.shibeList.observe(viewLifecycleOwner) { list ->
-            if (list.isNullOrEmpty()) return@observe
-            adapter.submitList(list)
-            Log.d("MainFragment", list.take(4).joinToString() { "${it.isFavorite}" })
-        }
         viewModel.errorNotification.observe(viewLifecycleOwner) { errorText ->
             errorText?.let {
                 Snackbar.make(binding.root, "Error: $errorText", Snackbar.LENGTH_LONG).show()
                 viewModel.errorNotification.value = null
             }
         }
+
+        pageAdapter = PageAdapter(
+            this,
+            listOf(
+                "ALL" to ImagePageFragment(viewModel.shibeList, viewModel::changeFavorite),
+                "FAVORITE" to ImagePageFragment(viewModel.favorites, viewModel::changeFavorite),
+            )
+        )
+        binding.viewPager.adapter = pageAdapter
+        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
+            tab.text = pageAdapter.getTitle(position)
+        }.attach()
+
         return binding.root
     }
 
+    class PageAdapter(
+        mainFragment: Fragment,
+        private val pages: List<Pair<String, Fragment>>,
+    ) : FragmentStateAdapter(mainFragment) {
+        override fun getItemCount() = pages.size
+
+        override fun createFragment(position: Int) = pages[position].second
+
+        fun getTitle(position: Int) = pages[position].first
+    }
 }

@@ -13,7 +13,7 @@ import retanar.test.chi.data.ShibeEntity
 import retanar.test.chi.databinding.ShibeListItemBinding
 
 class ShibeListAdapter(
-    private val onChangeFavorite: (Int) -> Unit,
+    private val onChangeFavorite: (String) -> Unit,
 ) : ListAdapter<ShibeEntity, ShibeListAdapter.ShibeViewHolder>(ShibeComparator()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShibeViewHolder {
@@ -37,7 +37,7 @@ class ShibeListAdapter(
             }
 
             addToFavorites.setOnClickListener {
-                onChangeFavorite(position)
+                onChangeFavorite(shibe.url)
             }
         }
     }
