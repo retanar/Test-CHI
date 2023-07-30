@@ -14,6 +14,7 @@ import retanar.test.chi.databinding.ShibeListItemBinding
 
 class ShibeListAdapter(
     private val onChangeFavorite: (String) -> Unit,
+    private val onReachedBottom: (() -> Unit)? = null,
 ) : ListAdapter<ShibeEntity, ShibeListAdapter.ShibeViewHolder>(ShibeComparator()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShibeViewHolder {
@@ -22,6 +23,12 @@ class ShibeListAdapter(
 
     override fun onBindViewHolder(holder: ShibeViewHolder, position: Int) {
         Log.d("Recycler", "Update on position $position triggered")
+
+        // Load more data
+        if (position + 1 >= itemCount) {
+            onReachedBottom?.invoke()
+        }
+
         val shibe = getItem(position)
         with(holder.binding) {
             Picasso.get()

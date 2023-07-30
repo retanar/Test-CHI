@@ -18,7 +18,6 @@ class MainViewModel : ViewModel() {
     val errorNotification = MutableLiveData<String?>(null)
 
     fun requestShibes() {
-        if (!shibeList.value.isNullOrEmpty()) return
         viewModelScope.launch {
             try {
                 val resp = shibeApiService.getShibes()

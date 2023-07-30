@@ -9,7 +9,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
-import retanar.test.chi.ImagePageFragment
 import retanar.test.chi.databinding.FragmentMainBinding
 
 class MainFragment : Fragment() {
@@ -32,7 +31,11 @@ class MainFragment : Fragment() {
         pageAdapter = PageAdapter(
             this,
             listOf(
-                "ALL" to ImagePageFragment(viewModel.shibeList, viewModel::changeFavorite),
+                "ALL" to ImagePageFragment(
+                    viewModel.shibeList,
+                    viewModel::changeFavorite,
+                    onReachedBottom = viewModel::requestShibes
+                ),
                 "FAVORITE" to ImagePageFragment(viewModel.favorites, viewModel::changeFavorite),
             )
         )

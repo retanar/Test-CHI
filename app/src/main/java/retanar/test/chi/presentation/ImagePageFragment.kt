@@ -1,4 +1,4 @@
-package retanar.test.chi
+package retanar.test.chi.presentation
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,6 +14,7 @@ import retanar.test.chi.presentation.ShibeListAdapter
 class ImagePageFragment(
     private val shibeList: LiveData<List<ShibeEntity>>,
     private val onChangeFavorite: (String) -> Unit,
+    private val onReachedBottom: (() -> Unit)? = null,
 ) : Fragment() {
 
     private lateinit var binding: FragmentImagePageBinding
@@ -22,7 +23,7 @@ class ImagePageFragment(
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         binding = FragmentImagePageBinding.inflate(inflater, container, false)
 
-        adapter = ShibeListAdapter(onChangeFavorite = onChangeFavorite)
+        adapter = ShibeListAdapter(onChangeFavorite = onChangeFavorite, onReachedBottom)
         binding.recycler.adapter = adapter
         binding.recycler.layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
 
