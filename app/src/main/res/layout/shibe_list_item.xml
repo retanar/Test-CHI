@@ -1,12 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="2dp">
-    <ImageView
+    <retanar.test.chi.presentation.SquareImageView
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:adjustViewBounds="true"/>
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            tools:src="@tools:sample/avatars"/>
+    <ImageButton
+            android:id="@+id/addToFavorites"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_gravity="bottom|end"
+            android:scaleType="fitCenter"
+            android:paddingEnd="2dp"
+            android:paddingBottom="2dp"
+            android:background="@android:color/transparent"
+            tools:src="@drawable/ic_launcher_background"/>
 </FrameLayout>
