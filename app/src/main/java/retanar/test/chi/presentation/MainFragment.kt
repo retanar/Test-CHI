@@ -31,7 +31,7 @@ class MainFragment : Fragment() {
         pageAdapter = PageAdapter(
             this,
             listOf(
-                "ALL" to ImagePageFragment(),
+                "ALL" to ImagesFragment(),
                 "FAVORITE" to FavoritesFragment(),
             )
         )
@@ -43,7 +43,7 @@ class MainFragment : Fragment() {
         return binding.root
     }
 
-    class PageAdapter(
+    private class PageAdapter(
         mainFragment: Fragment,
         private val pages: List<Pair<String, Fragment>>,
     ) : FragmentStateAdapter(mainFragment) {

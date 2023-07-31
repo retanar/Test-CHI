@@ -9,7 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import retanar.test.chi.databinding.FragmentImagePageBinding
 
-class ImagePageFragment : Fragment() {
+class ImagesFragment : Fragment() {
 
     private val viewModel: MainViewModel by activityViewModels()
     private lateinit var binding: FragmentImagePageBinding

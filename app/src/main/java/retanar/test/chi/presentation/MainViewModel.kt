@@ -1,5 +1,6 @@
 package retanar.test.chi.presentation
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
@@ -11,7 +12,9 @@ import retanar.test.chi.data.shibeApiService
 class MainViewModel : ViewModel() {
 
     private val internalList = mutableListOf<ShibeEntity>()
-    val shibeList = MutableLiveData<List<ShibeEntity>>(emptyList())
+    private val _shibeList = MutableLiveData<List<ShibeEntity>>(emptyList())
+    val shibeList: LiveData<List<ShibeEntity>>
+        get() = _shibeList
     val favorites = shibeList.map { list ->
         list.filter(ShibeEntity::isFavorite)
     }
@@ -45,6 +48,6 @@ class MainViewModel : ViewModel() {
     }
 
     private fun updatePublicList() {
-        shibeList.value = internalList.toList()
+        _shibeList.value = internalList.toList()
     }
 }
