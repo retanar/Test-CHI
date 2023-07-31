@@ -3,10 +3,12 @@ package retanar.test.chi.presentation
 import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil.ItemCallback
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import retanar.test.chi.R
 import retanar.test.chi.data.ShibeEntity
@@ -33,7 +35,13 @@ class ShibeListAdapter(
         with(holder.binding) {
             Picasso.get()
                 .load(shibe.url)
-                .into(imageView)
+                .into(imageView, object : Callback {
+                    override fun onSuccess() {
+                        progressBar.visibility = View.GONE
+                    }
+
+                    override fun onError(e: Exception?) {}
+                })
 
             if (shibe.isFavorite) {
                 addToFavorites.setImageResource(R.drawable.star_filled)

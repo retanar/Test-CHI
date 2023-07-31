@@ -31,12 +31,8 @@ class MainFragment : Fragment() {
         pageAdapter = PageAdapter(
             this,
             listOf(
-                "ALL" to ImagePageFragment(
-                    viewModel.shibeList,
-                    viewModel::changeFavorite,
-                    onReachedBottom = viewModel::requestShibes
-                ),
-                "FAVORITE" to ImagePageFragment(viewModel.favorites, viewModel::changeFavorite),
+                "ALL" to ImagePageFragment(),
+                "FAVORITE" to FavoritesFragment(),
             )
         )
         binding.viewPager.adapter = pageAdapter
